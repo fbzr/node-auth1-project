@@ -50,4 +50,17 @@ router.post('/register', async (req, res) => {
     }
 });
 
+router.get('/logout', async (req, res) => {
+    if (req.session) {
+        req.session.destroy(err => {
+            if (err) {
+                return res.json({ message: 'There was an error logging out' });
+            }
+            res.json({ message: 'User logged out' });
+        })
+    } else {
+        res.json({ message: 'User was not logged in' });
+    }
+});
+
 module.exports = router;
